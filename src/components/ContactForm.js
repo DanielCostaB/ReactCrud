@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 
-const ContactForm = () => {
+const ContactForm = (props) => {
   const initialFieldValues = {
     fullname: '',
     mobile: '',
@@ -17,8 +17,13 @@ const ContactForm = () => {
       [name]: value
     })
   }
+
+  const handleFormSubmit = e => {
+    e.preventDefault();
+    props.addOrEdit(values)
+  }
   return (
-    <form autoComplete="off">
+    <form autoComplete="off" onSubmit={handleFormSubmit}>
       <div className="form-group input-group">
         <div className="input-group-prepend">
           <div className="input-group-text">
@@ -60,7 +65,7 @@ const ContactForm = () => {
           onChange={handleInputChange}
           />
         </div>
-        <div className="form-control">
+        <div className="form-group">
           <input type="submit" value="Save" className="btn btn-primary btn-block" />
         </div>
     </form>
